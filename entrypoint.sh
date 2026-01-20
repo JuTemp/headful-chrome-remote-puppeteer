@@ -3,6 +3,7 @@
 clean_files() {
 	shopt -s dotglob
 	rm -rf /tmp/*
+	# rm -rf /app/userdata/Singleton*
 	shopt -u dotglob
 }
 

@@ -1,8 +1,10 @@
 services:
   headful-chrome-remote-puppeteer:
     image: ghcr.io/jutemp/headful-chrome-remote-puppeteer:latest
+    # volumes:
+    #   - ./userdata:/app/userdata
     ports:
-      - 5900:5900
-      - 9223:9223
-      - 9229:9229
+      - 5900:5900 # vnc port
+      - 9223:9223 # chrome port
+      - 9229:9229 # node port
     restart: unless-stopped
