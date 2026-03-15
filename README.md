@@ -12,15 +12,15 @@ If you need to save login information (such as cookies), uncomment line 6 of bot
 
 You can use WebGL.
 
-VNC screen listener: 0.0.0.0:5900
+VNC screen listener: `0.0.0.0:5900`
 
-Username: 123
+Username: `123`
 
-Password: 12345678
+Password: `12345678`
 
-Browser remote debugging listener: 0.0.0.0:9223
+Browser remote debugging listener: `0.0.0.0:9223`
 
-Node.js remote debugging listener: 0.0.0.0:9229
+Node.js remote debugging listener: `0.0.0.0:9229`
 
 ## How to use
 
@@ -29,3 +29,9 @@ git clone git@github.com:JuTemp/headful-chrome-remote-puppeteer.git
 cd headful-chrome-remote-puppeteer
 docker compose up -d
 ```
+
+## Note
+
+If you are using `dae`, try `network_mode: host`.
+
+Please do not use `volumes: ./:/app` unless you want to overwrite `$HOME/.vnc/passwd`.
