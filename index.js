@@ -20,7 +20,7 @@ const browser = await launch({
 browser.on("disconnected", () => process.exit(1));
 
 const page = await browser.newPage();
-await page.setViewport({ width: 1750, height: 1050 });
+await page.setViewport({ width: 1750, height: 910 });
 
 await page.goto("https://google.com");
 
