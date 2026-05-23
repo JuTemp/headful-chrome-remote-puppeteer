@@ -40,12 +40,6 @@ RUN apt-get update && \
 
 COPY ./nginx-transport.conf /etc/nginx/sites-enabled
 
-# Install puppeteer
-
-RUN cd /app && \
-    npm init -y --init-type module && \
-    npm install puppeteer puppeteer-core @puppeteer/browsers
-
 # Install google-chrome-stable
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -59,6 +53,12 @@ RUN wget -q -O /tmp/google-chrome-stable_current_amd64.deb https://dl.google.com
 
 ENV PUPPETEER_EXECUTABLE_PATH="/usr/bin/google-chrome-stable" \
     PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+
+# Install puppeteer
+
+RUN cd /app && \
+    npm init -y --init-type module && \
+    npm install puppeteer puppeteer-core @puppeteer/browsers
 
 WORKDIR /app
 
