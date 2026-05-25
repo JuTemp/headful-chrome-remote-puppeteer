@@ -35,3 +35,19 @@ docker compose up -d
 If you are using `dae`, try `network_mode: host`.
 
 Please do not use `volumes: ./:/app` unless you want to overwrite `$HOME/.vnc/passwd`.
+
+## Use extension
+
+View the `index-extension.js` file.
+
+For example, how to use Tampermonkey, especially how to ensure the plugin persists after a restart.
+
+Download CRX file [tampermonkey_stable.crx](https://www.tampermonkey.net/crx/tampermonkey_stable.crx) from its homepage [tampermonkey.net](https://www.tampermonkey.net/).
+
+`unzip` the CRX file in the `/app/tampermonkey_stable` folder, making sure `/app/tampermonkey_stable/manifest.json` exists.
+
+Adding `pipe: true, enableExtensions: ["/app/tampermonkey_stable"]`, and then it works.
+
+You can configure Tampermonkey like this below.
+
+![tampermonkey_changelog.png](./images/tampermonkey_changelog.png)
