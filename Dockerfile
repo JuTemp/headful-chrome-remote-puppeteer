@@ -1,4 +1,4 @@
-FROM debian-tuna:latest
+FROM debian:latest
 
 ENV DEBIAN_FRONTEND=noninteractive
 
