@@ -2,6 +2,8 @@ FROM ubuntu:latest
 
 ENV HOME=/app
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 # Replace apt sources
 
 # RUN apt-get update && apt-get install -y ca-certificates
@@ -41,8 +43,6 @@ RUN apt-get update && \
 COPY ./nginx-transport.conf /etc/nginx/sites-enabled
 
 # Install google-chrome-stable
-
-ENV DEBIAN_FRONTEND=noninteractive
 
 RUN wget -q -O /tmp/google-chrome-stable_current_amd64.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
     apt-get update && \
