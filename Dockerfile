@@ -1,4 +1,6 @@
-FROM ubuntu:latest
+FROM debian-tuna:latest
+
+ENV DEBIAN_FRONTEND=noninteractive
 
 ENV HOME=/app
 
@@ -7,6 +9,8 @@ ENV HOME=/app
 # RUN apt-get update && apt-get install -y ca-certificates
 
 # COPY ./tuna-ubuntu.sources /etc/apt/sources.list.d/ubuntu.sources
+
+# Install necessary commands
 
 RUN apt-get update && apt-get install -y wget curl
 
@@ -18,19 +22,10 @@ RUN wget -q -O /tmp/node-v25.3.0-linux-x64.tar.xz https://nodejs.org/dist/v25.3.
     tar -xf /tmp/node-v25.3.0-linux-x64.tar.xz -C /usr/local --strip-components=1 && \
     apt-get install -y libatomic1
 
-# Install xvfb
+# Install xrdp, xvfb and x11vnc
 
 RUN apt-get update && \
-    apt-get install -y xvfb
-
-# Install x11vnc
-
-RUN apt-get update && \
-    apt-get install -y x11vnc xxd && \
-    mkdir -p /app/.vnc && \
-    # password is 12345678
-    echo -n 'f0e43164f6c2e373' | xxd -r -p > /app/.vnc/passwd && \
-    chmod 600 /app/.vnc/passwd
+    apt-get install -y xvfb x11vnc xrdp
 
 # Install nginx
 
@@ -41,8 +36,6 @@ RUN apt-get update && \
 COPY ./nginx-transport.conf /etc/nginx/sites-enabled
 
 # Install google-chrome-stable
-
-ENV DEBIAN_FRONTEND=noninteractive
 
 RUN wget -q -O /tmp/google-chrome-stable_current_amd64.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
     apt-get update && \
@@ -56,9 +49,12 @@ ENV PUPPETEER_EXECUTABLE_PATH="/usr/bin/google-chrome-stable" \
 
 # Install puppeteer
 
-RUN cd /app && \
+RUN mkdir -p /app && \
+    cd /app && \
     npm init -y --init-type module && \
     npm install puppeteer puppeteer-core @puppeteer/browsers
+
+COPY ./xrdp.ini  /etc/xrdp/xrdp.ini
 
 WORKDIR /app
 
