@@ -43,7 +43,7 @@ nginx -g "daemon off;" &
 	echo
 
 	echo '-------- Test Availability Finish --------'
-	echo 'vncserver starts at 0.0.0.0:5900 with username "123" and password "12345678"'
+	echo 'rdpserver starts at 0.0.0.0:3389 with username "root" and password "12345678"'
 	echo
 
 ) &
