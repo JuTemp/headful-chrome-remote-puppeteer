@@ -15,7 +15,8 @@ permissions:
 jobs:
   release:
     if: |-
-      startsWith(github.event.head_commit.message, 'release') || 
+      github.event_name == 'workflow_dispatch' ||
+      startsWith(github.event.head_commit.message, 'release') ||
       startsWith(github.event.head_commit.message, 'Release')
     runs-on: ubuntu-latest
     steps:
