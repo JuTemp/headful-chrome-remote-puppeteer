@@ -36,6 +36,12 @@ If you are using `dae`, try `network_mode: host`.
 
 Please do not use `volumes: ./:/app` unless you want to overwrite `$HOME/.vnc/passwd`.
 
+## xdg-open
+
+I have overridden `xdg-open`.
+
+You can allow the automatic invocation of `xdg-open` in the browser's pop-up dialog.
+
 ## Use extension
 
 View the `index-extension.js` file.
