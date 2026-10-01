@@ -60,6 +60,12 @@ RUN cd /app && \
     npm init -y --init-type module && \
     npm install puppeteer puppeteer-core @puppeteer/browsers
 
+# Override `xdg-open`
+
+RUN XDG_OPEN=$(which xdg-open || echo "/usr/bin/xdg-open") && \
+    echo '#!/bin/sh\nexit 0' > "$XDG_OPEN" && \
+    chmod +x "$XDG_OPEN"
+
 WORKDIR /app
 
 COPY ./entrypoint.sh /entrypoint.sh
