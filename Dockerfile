@@ -14,11 +14,11 @@ RUN apt-get update && apt-get install -y wget curl
 
 # Install node
 
-RUN file="$(curl -s https://nodejs.org/download/release/latest/SHASUMS256.txt | grep -o 'node-v[0-9.]*-linux-x64\.tar\.xz')" && \
-    wget -q -O "/tmp/${file}" "https://nodejs.org/dist/v25.3.0/${file}" && \
+RUN tag="$(curl -s https://nodejs.org/download/release/latest/SHASUMS256.txt | grep -oE 'v[0-9.]+[0-9]+' | head -n 1)" && \
+    wget -q -O "/tmp/node-${tag}-linux-x64.tar.xz" "https://nodejs.org/dist/${tag}/node-${tag}-linux-x64.tar.xz" && \
     apt-get update && \
     apt-get install -y xz-utils && \
-    tar -xf "/tmp/${file}" -C /usr/local --strip-components=1 && \
+    tar -xf "/tmp/node-${tag}-linux-x64.tar.xz" -C /usr/local --strip-components=1 && \
     apt-get install -y libatomic1
 
 # Install xvfb
