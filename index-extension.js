@@ -9,6 +9,7 @@ const browser = await launch({
     pipe: true,
     enableExtensions: ["/app/tampermonkey_stable"],
     args: [
+        "--start-maximized",
         "--no-sandbox",
         "--disable-setuid-sandbox",
         "--disable-web-security",

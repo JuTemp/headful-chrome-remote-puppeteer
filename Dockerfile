@@ -19,6 +19,7 @@ RUN tag="$(curl -s https://nodejs.org/download/release/latest/SHASUMS256.txt | g
     apt-get update && \
     apt-get install -y xz-utils && \
     tar -xf "/tmp/node-${tag}-linux-x64.tar.xz" -C /usr/local --strip-components=1 && \
+    rm -f "/tmp/node-${tag}-linux-x64.tar.xz" && \
     apt-get install -y libatomic1
 
 # Install xvfb
@@ -45,9 +46,10 @@ COPY ./nginx-transport.conf /etc/nginx/sites-enabled
 
 # Install google-chrome-stable
 
-RUN wget -q -O /tmp/google-chrome-stable_current_amd64.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
+RUN wget -q -O "/tmp/google-chrome-stable_current_amd64.deb" https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
     apt-get update && \
-    apt-get install -y /tmp/google-chrome-stable_current_amd64.deb && \
+    apt-get install -y "/tmp/google-chrome-stable_current_amd64.deb" && \
+    rm -f "/tmp/google-chrome-stable_current_amd64.deb" && \
     apt-get install -y --no-install-recommends fonts-noto-cjk fonts-noto-color-emoji
 
 # Configure puppeteer environment

@@ -9,15 +9,15 @@ clean_files() {
 
 clean_files
 
-xvfb-run -s '-screen 0 1750x1050x24' sh -c 'env > /tmp/xvfb.config && sleep infinity' &
+nohup xvfb-run -s '-screen 0 1750x1050x24' sh -c 'env > /tmp/xvfb.config && sleep infinity' >/tmp/xvfb.nohup.log 2>&1 &
 while [ ! -f /tmp/xvfb.config ]; do
 	sleep 1
 done
 
-export DISPLAY="$( grep 'DISPLAY=' /tmp/xvfb.config | cut -c 9- )"
-export XAUTHORITY="$( grep 'XAUTHORITY=' /tmp/xvfb.config | cut -c 12- )"
+export DISPLAY="$(grep 'DISPLAY=' /tmp/xvfb.config | cut -c 9-)"
+export XAUTHORITY="$(grep 'XAUTHORITY=' /tmp/xvfb.config | cut -c 12-)"
 
-x11vnc -auth "${XAUTHORITY}" -display "${DISPLAY}" -usepw -forever > /tmp/x11vnc.log 2>&1 &
+nohup x11vnc -auth "${XAUTHORITY}" -display "${DISPLAY}" -usepw -forever >/tmp/x11vnc.log 2>&1 &
 
 nginx -g "daemon off;" &
 

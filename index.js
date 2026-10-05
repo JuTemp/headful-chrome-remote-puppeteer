@@ -6,6 +6,7 @@ const browser = await launch({
     // userDataDir: "./userdata",
     executablePath: "/usr/bin/google-chrome-stable",
     args: [
+        "--start-maximized",
         "--no-sandbox",
         "--disable-setuid-sandbox",
         "--disable-web-security",
